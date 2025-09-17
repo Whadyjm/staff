@@ -1,6 +1,11 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'dart:math' as math;
+
+import 'package:staff/widgets/dot_matrix_painter.dart'; // Import for math functions like sin and cos
+
+// ... (DotMatrixPainter class as defined above) ...
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -34,12 +39,25 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: Stack(
         children: [
-          Positioned.fill(
+          /*Positioned.fill(
             child: Image.asset(
               'assets/background.png',
               fit: BoxFit.cover,
             ),
+          ),*/
+          Positioned(
+            top: 0,
+            right: 0,
+            child: CustomPaint(
+              size: Size(MediaQuery.of(context).size.width * 0.6, MediaQuery.of(context).size.height * 0.4),
+              painter: DotMatrixPainter(
+                dotColor: Colors.greenAccent.withAlpha(50),
+                dotRadius: 3,
+                density: 1000,
+              ),
+            ),
           ),
+        
           Positioned.fill(
             child: DecoratedBox(
               decoration: BoxDecoration(
@@ -47,9 +65,8 @@ class _LoginPageState extends State<LoginPage> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withOpacity(0.8),
-                    Colors.black.withOpacity(0.4),
-                    Colors.black.withOpacity(0.8),
+                    Colors.black.withOpacity(0),
+                    Colors.black.withOpacity(0.3),
                   ],
                 ),
               ),
@@ -64,9 +81,9 @@ class _LoginPageState extends State<LoginPage> {
                   width: MediaQuery.of(context).size.width * 0.85,
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
-                    color: Colors.white.withAlpha(20),
+                    color: Colors.black.withAlpha(40),
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.white.withAlpha(80)),
+                    border: Border.all(color: Colors.white.withAlpha(150)),
                   ),
                   child: SingleChildScrollView(
                     child: Form(
@@ -74,20 +91,12 @@ class _LoginPageState extends State<LoginPage> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Text(
+                          Text(
                             "Bienvenido",
                             style: TextStyle(
                               fontSize: 32,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          const Text(
-                            "Inicia sesión en tu cuenta",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.white70,
                             ),
                           ),
                           const SizedBox(height: 40),
