@@ -34,12 +34,12 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: Stack(
         children: [
-          /*Positioned.fill(
-            child: Image.network(
-              '',
+          Positioned.fill(
+            child: Image.asset(
+              'assets/background.png',
               fit: BoxFit.cover,
             ),
-          ),*/
+          ),
           Positioned.fill(
             child: DecoratedBox(
               decoration: BoxDecoration(
@@ -47,8 +47,9 @@ class _LoginPageState extends State<LoginPage> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withOpacity(0.3),
-                    Colors.black.withOpacity(0.5),
+                    Colors.black.withOpacity(0.8),
+                    Colors.black.withOpacity(0.4),
+                    Colors.black.withOpacity(0.8),
                   ],
                 ),
               ),
@@ -58,14 +59,14 @@ class _LoginPageState extends State<LoginPage> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                filter: ImageFilter.blur(sigmaX: 7, sigmaY: 7),
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.85,
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
+                    color: Colors.white.withAlpha(20),
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.white.withOpacity(0.3)),
+                    border: Border.all(color: Colors.white.withAlpha(80)),
                   ),
                   child: SingleChildScrollView(
                     child: Form(
@@ -124,6 +125,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildUsernameField() {
     return TextFormField(
+      textInputAction: TextInputAction.next,
       controller: _usernameController,
       style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
@@ -155,6 +157,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildPasswordField() {
     return TextFormField(
+      textInputAction: TextInputAction.next,
       controller: _passwordController,
       obscureText: _obscurePassword,
       style: const TextStyle(color: Colors.white),
@@ -194,7 +197,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildRoleDropdown() {
     return DropdownButtonFormField<String>(
-      value: _role,
+      initialValue: _role,
       dropdownColor: Colors.black.withOpacity(0.7),
       style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
@@ -223,8 +226,8 @@ class _LoginPageState extends State<LoginPage> {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Colors.green.withOpacity(0.8),
-            Colors.green.shade800.withOpacity(0.8),
+            Colors.green.shade400,
+            Colors.green.shade700
           ],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
@@ -233,7 +236,6 @@ class _LoginPageState extends State<LoginPage> {
       ),
       child: ElevatedButton.icon(
         onPressed: _login,
-        icon: const Icon(Icons.login, color: Colors.white),
         label: const Text(
           "Ingresar",
           style: TextStyle(
