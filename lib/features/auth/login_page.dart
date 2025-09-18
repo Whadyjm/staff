@@ -50,13 +50,12 @@ class _LoginPageState extends State<LoginPage> {
             right: 0,
             child: AnimatedDotMatrix(
               width: MediaQuery.of(context).size.width,
-              height: 300,
+              height: 500,
               dotColor: Colors.green,
               dotRadius: 5.0,
               density: 150,
             ),
           ),
-
           Positioned.fill(
             child: DecoratedBox(
               decoration: BoxDecoration(
@@ -65,17 +64,18 @@ class _LoginPageState extends State<LoginPage> {
                   end: Alignment.bottomCenter,
                   colors: [
                     Colors.black.withOpacity(0),
-                    Colors.black.withOpacity(0.3),
+                    Colors.white.withOpacity(0.3),
                   ],
                 ),
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 100, top: 60, right: 100),
+            padding: const EdgeInsets.only(left: 100, top: 100, right: 100),
             child: Column(
               children: [
-                Container(
+                  Image.asset('assets/agrieuropa.png', height: 100),
+                  Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     boxShadow: [
@@ -86,9 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ],
                   ),
-                  child: Image.asset('assets/staff.png', height: 100),
-                ),
-                Image.asset('assets/agrieuropa.png', height: 50),
+                  child: Image.asset('assets/staff.png', height: 30)),
               ],
             ),
           ),
@@ -113,15 +111,19 @@ class _LoginPageState extends State<LoginPage> {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text(
-                              "Bienvenido",
-                              style: TextStyle(
-                                fontSize: 32,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
+                            Row(
+                              children: [
+                                Text(
+                                  "Bienvenido",
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
                             ),
-                            const SizedBox(height: 40),
+                            const SizedBox(height: 20),
                             _buildUsernameField(),
                             const SizedBox(height: 20),
                             _buildPasswordField(),
