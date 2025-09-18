@@ -48,16 +48,15 @@ class _LoginPageState extends State<LoginPage> {
           Positioned(
             top: 0,
             right: 0,
-            child: CustomPaint(
-              size: Size(MediaQuery.of(context).size.width * 0.6, MediaQuery.of(context).size.height * 0.4),
-              painter: DotMatrixPainter(
-                dotColor: Colors.greenAccent.withAlpha(50),
-                dotRadius: 3,
-                density: 1000,
-              ),
+            child: AnimatedDotMatrix(
+              width: MediaQuery.of(context).size.width,
+              height: 300,
+              dotColor: Colors.green,
+              dotRadius: 5.0,
+              density: 150,
             ),
           ),
-        
+
           Positioned.fill(
             child: DecoratedBox(
               decoration: BoxDecoration(
@@ -72,54 +71,79 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          Center(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 7, sigmaY: 7),
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.85,
-                  padding: const EdgeInsets.all(24),
+          Padding(
+            padding: const EdgeInsets.only(left: 100, top: 100),
+            child: Column(
+              children: [
+                Container(
                   decoration: BoxDecoration(
-                    color: Colors.black.withAlpha(40),
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.white.withAlpha(150)),
+                    borderRadius: BorderRadius.all(Radius.circular(12)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 8,
+                        offset: Offset(0, 4),
+                      ),
+                    ],
                   ),
-                  child: SingleChildScrollView(
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            "Bienvenido",
-                            style: TextStyle(
-                              fontSize: 32,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          const SizedBox(height: 40),
-                          _buildUsernameField(),
-                          const SizedBox(height: 20),
-                          _buildPasswordField(),
-                          const SizedBox(height: 20),
-                          _buildRoleDropdown(),
-                          const SizedBox(height: 30),
-                          _buildLoginButton(),
-                          const SizedBox(height: 10),
-                          TextButton(
-                            onPressed: () {},
-                            child: const Text(
-                              "¿Olvidaste tu contraseña?",
+                  child: Image.asset('assets/staff.png', height: 50),
+                ),
+                const SizedBox(height: 8),
+                Image.asset('assets/agrieuropa.png', height: 50),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 150),
+            child: Center(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 7, sigmaY: 7),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.85,
+                    padding: const EdgeInsets.all(24),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withAlpha(40),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: Colors.white.withAlpha(150)),
+                    ),
+                    child: SingleChildScrollView(
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "Bienvenido",
                               style: TextStyle(
-                                color: Colors.white70,
-                                decoration: TextDecoration.underline,
-                                decorationColor: Colors.white70,
+                                fontSize: 32,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
                               ),
                             ),
-                          ),
-                        ],
+                            const SizedBox(height: 40),
+                            _buildUsernameField(),
+                            const SizedBox(height: 20),
+                            _buildPasswordField(),
+                            const SizedBox(height: 20),
+                            _buildRoleDropdown(),
+                            const SizedBox(height: 30),
+                            _buildLoginButton(),
+                            const SizedBox(height: 10),
+                            TextButton(
+                              onPressed: () {},
+                              child: const Text(
+                                "¿Olvidaste tu contraseña?",
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                  decoration: TextDecoration.underline,
+                                  decorationColor: Colors.white70,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -158,9 +182,11 @@ class _LoginPageState extends State<LoginPage> {
         ),
         prefixIcon: const Icon(Icons.person, color: Colors.white70),
       ),
-      validator: (value) => (value == null || value.isEmpty)
-          ? 'Por favor, ingrese su usuario'
-          : null,
+      validator:
+          (value) =>
+              (value == null || value.isEmpty)
+                  ? 'Por favor, ingrese su usuario'
+                  : null,
     );
   }
 
@@ -198,15 +224,17 @@ class _LoginPageState extends State<LoginPage> {
           onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
         ),
       ),
-      validator: (value) => (value == null || value.isEmpty)
-          ? 'Por favor, ingrese su contraseña'
-          : null,
+      validator:
+          (value) =>
+              (value == null || value.isEmpty)
+                  ? 'Por favor, ingrese su contraseña'
+                  : null,
     );
   }
 
   Widget _buildRoleDropdown() {
     return DropdownButtonFormField<String>(
-      initialValue: _role,
+      value: _role,
       dropdownColor: Colors.black.withOpacity(0.7),
       style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
@@ -234,10 +262,7 @@ class _LoginPageState extends State<LoginPage> {
       width: double.infinity,
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            Colors.green.shade400,
-            Colors.green.shade700
-          ],
+          colors: [Colors.green.shade400, Colors.green.shade700],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
         ),
