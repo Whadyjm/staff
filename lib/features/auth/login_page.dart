@@ -72,23 +72,22 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 100, top: 100),
+            padding: const EdgeInsets.only(left: 100, top: 60, right: 100),
             child: Column(
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
+                    borderRadius: BorderRadius.circular(30),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
+                        color: Colors.white.withAlpha(150),
                         blurRadius: 8,
                         offset: Offset(0, 4),
                       ),
                     ],
                   ),
-                  child: Image.asset('assets/staff.png', height: 50),
+                  child: Image.asset('assets/staff.png', height: 100),
                 ),
-                const SizedBox(height: 8),
                 Image.asset('assets/agrieuropa.png', height: 50),
               ],
             ),
