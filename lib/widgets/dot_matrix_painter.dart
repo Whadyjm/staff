@@ -19,7 +19,6 @@ class DotMatrixPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final Paint paint = Paint()..color = dotColor;
 
-    // Calculamos el número de filas y columnas en base al "density"
     int columns = math.sqrt(density).floor();
     int rows = (density / columns).ceil();
 
@@ -39,7 +38,6 @@ class DotMatrixPainter extends CustomPainter {
         );
         double normalizedDistance = distanceToCenter / maxDistance;
 
-        // Animación de opacidad con coseno
         double fade = (math.cos(animationValue * 2 * math.pi) + 1) / 2;
         int alpha = (255 * (1 - normalizedDistance) * fade).toInt().clamp(
           0,
@@ -85,7 +83,7 @@ class _AnimatedDotMatrixState extends State<AnimatedDotMatrix>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 8), // velocidad de animación
+      duration: const Duration(seconds: 8),
     )..repeat();
   }
 

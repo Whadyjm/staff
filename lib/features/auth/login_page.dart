@@ -2,10 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'dart:math' as math;
-
-import 'package:staff/widgets/dot_matrix_painter.dart'; // Import for math functions like sin and cos
-
-// ... (DotMatrixPainter class as defined above) ...
+import 'package:staff/widgets/dot_matrix_painter.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -39,43 +36,9 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: Stack(
         children: [
-          /*Positioned.fill(
-            child: Image.asset(
-              'assets/background.png',
-              fit: BoxFit.cover,
-            ),
-          ),*/
-          Positioned(
-            top: 0,
-            right: 0,
-            child: AnimatedDotMatrix(
-              width: MediaQuery.of(context).size.width,
-              height: 500,
-              dotColor: Colors.green,
-              dotRadius: 5.0,
-              density: 150,
-            ),
-          ),
-          Positioned.fill(
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.black.withOpacity(0),
-                    Colors.white.withOpacity(0.3),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 100, top: 100, right: 100),
-            child: Column(
-              children: [Image.asset('assets/agrieuropa.png', height: 100)],
-            ),
-          ),
+          _dotAnimation(),
+          _gradientBackground(),
+          _companyLogo(),
           Padding(
             padding: const EdgeInsets.only(top: 150),
             child: Center(
@@ -140,9 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                               child: const Text(
                                 "¿Olvidaste tu contraseña?",
                                 style: TextStyle(
-                                  color: Colors.white70,
-                                  decoration: TextDecoration.underline,
-                                  decorationColor: Colors.white70,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
@@ -167,30 +128,28 @@ class _LoginPageState extends State<LoginPage> {
       style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
         labelText: "Usuario",
-        labelStyle: TextStyle(color: Colors.white.withOpacity(0.8)),
+        labelStyle: TextStyle(color: Colors.white),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white.withOpacity(0.3)),
+          borderSide: BorderSide(color: Colors.white.withAlpha(80)),
           borderRadius: BorderRadius.circular(12),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white.withOpacity(0.8)),
+          borderSide: BorderSide(color: Colors.white),
           borderRadius: BorderRadius.circular(12),
         ),
         errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.red.withOpacity(0.8)),
+          borderSide: BorderSide(color: Colors.red),
           borderRadius: BorderRadius.circular(12),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.red.withOpacity(0.8)),
+          borderSide: BorderSide(color: Colors.red),
           borderRadius: BorderRadius.circular(12),
         ),
         prefixIcon: const Icon(Icons.person, color: Colors.white70),
       ),
-      validator:
-          (value) =>
-              (value == null || value.isEmpty)
-                  ? 'Por favor, ingrese su usuario'
-                  : null,
+      validator: (value) => (value == null || value.isEmpty)
+          ? 'Por favor, ingrese su usuario'
+          : null,
     );
   }
 
@@ -202,21 +161,21 @@ class _LoginPageState extends State<LoginPage> {
       style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
         labelText: "Contraseña",
-        labelStyle: TextStyle(color: Colors.white.withOpacity(0.8)),
+        labelStyle: TextStyle(color: Colors.white),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white.withOpacity(0.3)),
+          borderSide: BorderSide(color: Colors.white.withAlpha(80)),
           borderRadius: BorderRadius.circular(12),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white.withOpacity(0.8)),
+          borderSide: BorderSide(color: Colors.white),
           borderRadius: BorderRadius.circular(12),
         ),
         errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.red.withOpacity(0.8)),
+          borderSide: BorderSide(color: Colors.red),
           borderRadius: BorderRadius.circular(12),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.red.withOpacity(0.8)),
+          borderSide: BorderSide(color: Colors.red),
           borderRadius: BorderRadius.circular(12),
         ),
         prefixIcon: const Icon(Icons.lock, color: Colors.white70),
@@ -228,27 +187,25 @@ class _LoginPageState extends State<LoginPage> {
           onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
         ),
       ),
-      validator:
-          (value) =>
-              (value == null || value.isEmpty)
-                  ? 'Por favor, ingrese su contraseña'
-                  : null,
+      validator: (value) => (value == null || value.isEmpty)
+          ? 'Por favor, ingrese su contraseña'
+          : null,
     );
   }
 
   Widget _buildRoleDropdown() {
     return DropdownButtonFormField<String>(
-      value: _role,
-      dropdownColor: Colors.black.withOpacity(0.7),
+      initialValue: _role,
+      dropdownColor: Colors.black87,
       style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
-        labelStyle: TextStyle(color: Colors.white.withOpacity(0.8)),
+        labelStyle: TextStyle(color: Colors.white),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white.withOpacity(0.3)),
+          borderSide: BorderSide(color: Colors.white.withAlpha(80)),
           borderRadius: BorderRadius.circular(12),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white.withOpacity(0.8)),
+          borderSide: BorderSide(color: Colors.white),
           borderRadius: BorderRadius.circular(12),
         ),
         prefixIcon: const Icon(Icons.group, color: Colors.white70),
@@ -289,5 +246,45 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  Widget _dotAnimation() {
+    return Positioned(
+      top: 0,
+      right: 0,
+      child: AnimatedDotMatrix(
+        width: MediaQuery.of(context).size.width,
+        height: 500,
+        dotColor: Colors.green,
+        dotRadius: 5.0,
+        density: 150,
+      ),
+    );
+  }
+
+  Widget _gradientBackground(){
+    return Positioned.fill(
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.black.withAlpha(0),
+                    Colors.white.withAlpha(50),
+                  ],
+                ),
+              ),
+            ),
+          );
+  }
+
+  Widget _companyLogo(){
+    return Padding(
+            padding: const EdgeInsets.only(left: 100, top: 100, right: 100),
+            child: Column(
+              children: [Image.asset('assets/agrieuropa.png', height: 100)],
+            ),
+          );
   }
 }
