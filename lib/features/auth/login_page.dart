@@ -73,21 +73,7 @@ class _LoginPageState extends State<LoginPage> {
           Padding(
             padding: const EdgeInsets.only(left: 100, top: 100, right: 100),
             child: Column(
-              children: [
-                  Image.asset('assets/agrieuropa.png', height: 100),
-                  Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.white.withAlpha(150),
-                        blurRadius: 8,
-                        offset: Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: Image.asset('assets/staff.png', height: 30)),
-              ],
+              children: [Image.asset('assets/agrieuropa.png', height: 100)],
             ),
           ),
           Padding(
@@ -111,6 +97,23 @@ class _LoginPageState extends State<LoginPage> {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.white.withAlpha(100),
+                                    blurRadius: 8,
+                                    offset: Offset(0, 4),
+                                  ),
+                                ],
+                              ),
+                              child: Image.asset(
+                                'assets/staff.png',
+                                height: 30,
+                              ),
+                            ),
+                            const SizedBox(height: 20),
                             Row(
                               children: [
                                 Text(
